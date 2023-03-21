@@ -1,5 +1,7 @@
 import tkinter
 import customtkinter
+from random import choice
+from string import ascii_lowercase, ascii_uppercase, digits
 
 
 class App:
@@ -14,12 +16,18 @@ class App:
         self.generate_password_button = customtkinter.CTkButton(
             master=self.root,
             text='GeneratePassword',
-            command=self.generate_password
+            command=self.display_password
             )
         self.generate_password_button.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
 
     def generate_password(self):
-        print('password')
+        special_characters = '!@#$%^&*()_-<>?'
+        all_characters = ascii_lowercase + ascii_uppercase + digits + special_characters
+        return ''.join(choice(all_characters) for _ in range(15))
+
+    def display_password(self):
+        password = self.generate_password()
+        print(password)
 
     def run_app(self):
         self.root.mainloop()
