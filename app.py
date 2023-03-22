@@ -51,7 +51,9 @@ class App(ctk.CTk):
         length = max(length, min_length)
         special_characters = '!@#$%^&*()_-<>?'
         all_characters = ascii_lowercase + ascii_uppercase + digits + special_characters
-        return ''.join(choice(all_characters) for _ in range(length))
+        password = ''.join(choice(all_characters) for _ in range(length - 4))
+        password += choice(ascii_lowercase) + choice(ascii_uppercase) + choice(digits) + choice(special_characters)
+        return password
 
     def display_password(self):
         try:
