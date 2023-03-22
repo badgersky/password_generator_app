@@ -51,7 +51,7 @@ class App(ctk.CTk):
 
     @staticmethod
     def generate_password(length):
-        max_length = 25
+        max_length = 40
         min_length = 10
 
         length = min(length, max_length)
