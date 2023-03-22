@@ -24,7 +24,7 @@ class App(ctk.CTk):
         self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # password to what
-        self.to_what_label = ctk.CTkLabel(self, text='Password to what?:')
+        self.to_what_label = ctk.CTkLabel(self, text='Password to what:')
         self.to_what_label.grid(column=0, row=1, padx=20, pady=10, sticky='w')
 
         self.to_what_textbox = ctk.CTkTextbox(self, height=30)
