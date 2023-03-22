@@ -1,6 +1,9 @@
+import csv
+
 import customtkinter as ctk
 from random import choice
 from string import ascii_lowercase, ascii_uppercase, digits
+from utils import decrypt_password, encrypt_password
 
 
 class App(ctk.CTk):
@@ -72,7 +75,15 @@ class App(ctk.CTk):
         self.password_textbox.insert('0.0', f'{password}')
 
     def save_to_json(self):
-        pass
+        password = self.password_textbox.get('0.0', 'end')
+        enc_password = encrypt_password(password).decode()
+        password_to = self.to_what_textbox.get('0.0', 'end')[:-1]
+
+        path = 'files/passwords.csv'
+        with open(path, 'a', newline='') as file:
+            row = (password_to, enc_password)
+            writer = csv.writer(file)
+            writer.writerow(row)
 
     def copy_to_clipboard(self):
         pass
