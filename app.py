@@ -1,5 +1,5 @@
 import csv
-
+from tkinter import messagebox
 import customtkinter as ctk
 from random import choice
 from string import ascii_lowercase, ascii_uppercase, digits
@@ -27,7 +27,7 @@ class App(ctk.CTk):
         self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # password to what
-        self.to_what_label = ctk.CTkLabel(self, text='Password to what:')
+        self.to_what_label = ctk.CTkLabel(self, text='Password to:')
         self.to_what_label.grid(column=0, row=1, padx=20, pady=10, sticky='w')
 
         self.to_what_textbox = ctk.CTkTextbox(self, height=30)
@@ -75,15 +75,27 @@ class App(ctk.CTk):
         self.password_textbox.insert('0.0', f'{password}')
 
     def save_to_json(self):
+        if self.validate_input():
+            password_to, enc_password = self.validate_input()
+            path = 'passwords.csv'
+            with open(path, 'a', newline='') as file:
+                row = (password_to, enc_password)
+                writer = csv.writer(file)
+                writer.writerow(row)
+                self.to_what_textbox.delete('0.0', 'end')
+                self.password_textbox.delete('0.0', 'end')
+                self.password_length_textbox.delete('0.0', 'end')
+
+    def validate_input(self):
         password = self.password_textbox.get('0.0', 'end')
         enc_password = encrypt_password(password).decode()
-        password_to = self.to_what_textbox.get('0.0', 'end')[:-1]
 
-        path = 'files/passwords.csv'
-        with open(path, 'a', newline='') as file:
-            row = (password_to, enc_password)
-            writer = csv.writer(file)
-            writer.writerow(row)
+        password_to = self.to_what_textbox.get('0.0', 'end')[:-1]
+        if password_to == '':
+            messagebox.showerror('error', '"Password to:" cannot be empty')
+            return False
+        else:
+            return password_to, enc_password
 
     def copy_to_clipboard(self):
         pass
