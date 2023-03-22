@@ -1,4 +1,3 @@
-import tkinter
 import customtkinter as ctk
 from random import choice
 from string import ascii_lowercase, ascii_uppercase, digits
@@ -22,25 +21,29 @@ class App(ctk.CTk):
         self.password_label.grid(column=0, row=0, padx=20, pady=10, sticky='w')
 
         self.password_textbox = ctk.CTkTextbox(self, height=30)
-        self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew')
+        self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # password to what
         self.to_what_label = ctk.CTkLabel(self, text='Password to what?:')
         self.to_what_label.grid(column=0, row=1, padx=20, pady=10, sticky='w')
 
         self.to_what_textbox = ctk.CTkTextbox(self, height=30)
-        self.to_what_textbox.grid(column=1, row=1, padx=20, pady=10, sticky='nsew')
+        self.to_what_textbox.grid(column=1, row=1, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # password length
         self.password_length_label = ctk.CTkLabel(self, text='Password length:')
         self.password_length_label.grid(column=0, row=2, padx=20, pady=10, sticky='w')
 
         self.password_length_textbox = ctk.CTkTextbox(self, height=30)
-        self.password_length_textbox.grid(column=1, row=2, padx=20, pady=10, sticky='nsew')
+        self.password_length_textbox.grid(column=1, row=2, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # generate password button
         self.generate_password_button = ctk.CTkButton(self, text='GeneratePassword', command=self.display_password)
         self.generate_password_button.grid(column=0, row=3, padx=20, pady=10, sticky='w')
+
+        # save to json
+        self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_json)
+        self.save_to_jason_button.grid(column=2, row=3, padx=20, pady=10, sticky='nsew')
 
     @staticmethod
     def generate_password(length):
@@ -63,6 +66,9 @@ class App(ctk.CTk):
         self.password_textbox.delete('0.0', 'end')
         password = self.generate_password(length)
         self.password_textbox.insert('0.0', f'{password}')
+
+    def save_to_json(self):
+        pass
 
     def run_app(self):
         self.mainloop()
