@@ -9,4 +9,8 @@ def encrypt(password):
 
 
 def decrypt(dec_password):
-    pass
+    key = dec_password[:44]
+    fernet = Fernet(key)
+    dec_password = dec_password[44:]
+    password = fernet.decrypt(dec_password)
+    return password
