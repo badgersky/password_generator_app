@@ -10,7 +10,7 @@ class App(ctk.CTk):
         ctk.set_appearance_mode('System')
         ctk.set_default_color_theme('green')
 
-        self.geometry('450x200')
+        self.geometry('550x220')
         self.title('PasswordGenerator')
 
         self.columnconfigure(0, weight=1)
@@ -43,7 +43,11 @@ class App(ctk.CTk):
 
         # save to json
         self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_json)
-        self.save_to_jason_button.grid(column=2, row=3, padx=20, pady=10, sticky='nsew')
+        self.save_to_jason_button.grid(column=2, row=3, padx=20, pady=10, sticky='w')
+
+        # copy to clipboard
+        self.copy_to_clipboard_button = ctk.CTkButton(self, text='CopyToClipboard', command=self.copy_to_clipboard)
+        self.copy_to_clipboard_button.grid(column=1, row=3, padx=20, pady=10)
 
     @staticmethod
     def generate_password(length):
@@ -68,6 +72,9 @@ class App(ctk.CTk):
         self.password_textbox.insert('0.0', f'{password}')
 
     def save_to_json(self):
+        pass
+
+    def copy_to_clipboard(self):
         pass
 
     def run_app(self):
