@@ -14,7 +14,7 @@ class App(ctk.CTk):
         ctk.set_appearance_mode('System')
         ctk.set_default_color_theme('green')
 
-        self.geometry('550x220')
+        self.geometry('600x270')
         self.title('PasswordGenerator')
 
         self.columnconfigure(0, weight=1)
@@ -43,15 +43,19 @@ class App(ctk.CTk):
 
         # generate password button
         self.generate_password_button = ctk.CTkButton(self, text='GeneratePassword', command=self.display_password)
-        self.generate_password_button.grid(column=0, row=3, padx=20, pady=10, sticky='w')
-
-        # save to json
-        self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_json)
-        self.save_to_jason_button.grid(column=2, row=3, padx=20, pady=10, sticky='w')
+        self.generate_password_button.grid(column=0, row=3, padx=20, pady=10, sticky='nsew')
 
         # copy to clipboard
         self.copy_to_clipboard_button = ctk.CTkButton(self, text='CopyToClipboard', command=self.copy_to_clipboard)
-        self.copy_to_clipboard_button.grid(column=1, row=3, padx=20, pady=10)
+        self.copy_to_clipboard_button.grid(column=1, row=3, padx=20, pady=10, sticky='nsew')
+
+        # save to json
+        self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_json)
+        self.save_to_jason_button.grid(column=1, row=4, padx=20, pady=10, sticky='nsew')
+
+        # display all_passwords
+        self.display_passwords_window = ctk.CTkButton(self, text='DisplayPasswords', command=self.display_passwords)
+        self.display_passwords_window.grid(column=0, row=4, padx=20, pady=10, sticky='nsew')
 
     @staticmethod
     def generate_password(length):
@@ -101,6 +105,9 @@ class App(ctk.CTk):
     def copy_to_clipboard(self):
         password = self.password_textbox.get('0.0', 'end')
         pyperclip.copy(password)
+
+    def open_display_passwords_window(self):
+        pass
 
     def run_app(self):
         self.mainloop()
