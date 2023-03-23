@@ -110,7 +110,10 @@ class App(ctk.CTk):
 
     def copy_to_clipboard(self):
         password = self.password_textbox.get('0.0', 'end')
-        pyperclip.copy(password)
+        if password.strip() == '':
+            pass
+        else:
+            pyperclip.copy(password)
 
     def open_toplevel_window(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
