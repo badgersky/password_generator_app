@@ -28,7 +28,7 @@ class App(ctk.CTk):
         self.password_textbox = ctk.CTkTextbox(self, height=30)
         self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew', columnspan=2)
 
-        # password to what
+        # password for what
         self.to_what_label = ctk.CTkLabel(self, text='Password for:')
         self.to_what_label.grid(column=0, row=1, padx=20, pady=10, sticky='w')
 
@@ -102,7 +102,7 @@ class App(ctk.CTk):
         enc_password = encrypt_password(password).decode()
 
         password_for = self.to_what_textbox.get('0.0', 'end')[:-1]
-        if password_for == '':
+        if password_for.strip() == '':
             messagebox.showerror('error', '"Password for:" cannot be empty')
             return False
         else:
