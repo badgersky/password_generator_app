@@ -47,7 +47,7 @@ class App(ctk.CTk):
         self.generate_password_button.grid(column=0, row=3, padx=20, pady=10, sticky='nsew')
 
         # copy to clipboard
-        self.copy_to_clipboard_button = ctk.CTkButton(self, text='CopyToClipboard', command=self.copy_to_clipboard)
+        self.copy_to_clipboard_button = ctk.CTkButton(self, text='CopyPassword', command=self.copy_to_clipboard)
         self.copy_to_clipboard_button.grid(column=1, row=3, padx=20, pady=10, sticky='nsew')
 
         # save to json

@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from utils import decrypt_password
 import csv
+import pyperclip
 
 
 class TopLevelWindow(ctk.CTkToplevel):
@@ -32,6 +33,10 @@ class TopLevelWindow(ctk.CTkToplevel):
         self.find_password_button = ctk.CTkButton(self, text='FindPassword', command=self.display_password)
         self.find_password_button.grid(column=0, row=2, padx=20, pady=10, sticky='w')
 
+        # copy to clipboard
+        self.copy_button = ctk.CTkButton(self, text='CopyPassword', command=self.copy_to_clipboard)
+        self.copy_button.grid(column=1, row=2, padx=20, pady=10, sticky='e')
+
     @staticmethod
     def load_from_csv():
         rows = []
@@ -58,6 +63,13 @@ class TopLevelWindow(ctk.CTkToplevel):
                     enc_password = decrypt_password(row[1])
                     self.password_textbox.delete('0.0', 'end')
                     self.password_textbox.insert('0.0', text=enc_password)
+
+    def copy_to_clipboard(self):
+        password = self.password_textbox.get('0.0', 'end')
+        if password.strip() == '':
+            pass
+        else:
+            pyperclip.copy(password)
 
 
 if __name__ == '__main__':
