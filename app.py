@@ -29,7 +29,7 @@ class App(ctk.CTk):
         self.password_textbox.grid(column=1, row=0, padx=20, pady=10, sticky='nsew', columnspan=2)
 
         # password to what
-        self.to_what_label = ctk.CTkLabel(self, text='Password to:')
+        self.to_what_label = ctk.CTkLabel(self, text='Password for:')
         self.to_what_label.grid(column=0, row=1, padx=20, pady=10, sticky='w')
 
         self.to_what_textbox = ctk.CTkTextbox(self, height=30)
@@ -51,14 +51,14 @@ class App(ctk.CTk):
         self.copy_to_clipboard_button.grid(column=1, row=3, padx=20, pady=10, sticky='nsew')
 
         # save to json
-        self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_json)
+        self.save_to_jason_button = ctk.CTkButton(self, text='SavePassword', command=self.save_to_csv)
         self.save_to_jason_button.grid(column=1, row=4, padx=20, pady=10, sticky='nsew')
 
         # display all_passwords
         self.display_passwords_window = ctk.CTkButton(
             self,
-            text='DisplayPasswords',
-            command=self.open_display_passwords_window
+            text='FindPassword',
+            command=self.open_toplevel_window
             )
         self.display_passwords_window.grid(column=0, row=4, padx=20, pady=10, sticky='nsew')
         self.toplevel_window = None
@@ -85,12 +85,12 @@ class App(ctk.CTk):
         password = self.generate_password(length)
         self.password_textbox.insert('0.0', f'{password}')
 
-    def save_to_json(self):
+    def save_to_csv(self):
         if self.validate_input():
-            password_to, enc_password = self.validate_input()
+            password_for, enc_password = self.validate_input()
             path = 'passwords.csv'
             with open(path, 'a', newline='') as file:
-                row = (password_to, enc_password)
+                row = (password_for, enc_password)
                 writer = csv.writer(file)
                 writer.writerow(row)
                 self.to_what_textbox.delete('0.0', 'end')
@@ -101,18 +101,18 @@ class App(ctk.CTk):
         password = self.password_textbox.get('0.0', 'end')
         enc_password = encrypt_password(password).decode()
 
-        password_to = self.to_what_textbox.get('0.0', 'end')[:-1]
-        if password_to == '':
-            messagebox.showerror('error', '"Password to:" cannot be empty')
+        password_for = self.to_what_textbox.get('0.0', 'end')[:-1]
+        if password_for == '':
+            messagebox.showerror('error', '"Password for:" cannot be empty')
             return False
         else:
-            return password_to, enc_password
+            return password_for, enc_password
 
     def copy_to_clipboard(self):
         password = self.password_textbox.get('0.0', 'end')
         pyperclip.copy(password)
 
-    def open_display_passwords_window(self):
+    def open_toplevel_window(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
             self.toplevel_window = TopLevelWindow()
         else:
