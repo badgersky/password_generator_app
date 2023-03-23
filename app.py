@@ -3,8 +3,9 @@ from tkinter import messagebox
 import customtkinter as ctk
 from random import choice
 from string import ascii_lowercase, ascii_uppercase, digits
-from utils import decrypt_password, encrypt_password
+from utils import encrypt_password
 import pyperclip
+from top_window import TopLevelWindow
 
 
 class App(ctk.CTk):
@@ -54,8 +55,13 @@ class App(ctk.CTk):
         self.save_to_jason_button.grid(column=1, row=4, padx=20, pady=10, sticky='nsew')
 
         # display all_passwords
-        self.display_passwords_window = ctk.CTkButton(self, text='DisplayPasswords', command=self.display_passwords)
+        self.display_passwords_window = ctk.CTkButton(
+            self,
+            text='DisplayPasswords',
+            command=self.open_display_passwords_window
+            )
         self.display_passwords_window.grid(column=0, row=4, padx=20, pady=10, sticky='nsew')
+        self.toplevel_window = None
 
     @staticmethod
     def generate_password(length):
@@ -107,7 +113,10 @@ class App(ctk.CTk):
         pyperclip.copy(password)
 
     def open_display_passwords_window(self):
-        pass
+        if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
+            self.toplevel_window = TopLevelWindow()
+        else:
+            self.toplevel_window.focus()
 
     def run_app(self):
         self.mainloop()
