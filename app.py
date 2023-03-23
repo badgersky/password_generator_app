@@ -4,6 +4,7 @@ import customtkinter as ctk
 from random import choice
 from string import ascii_lowercase, ascii_uppercase, digits
 from utils import decrypt_password, encrypt_password
+import pyperclip
 
 
 class App(ctk.CTk):
@@ -98,7 +99,8 @@ class App(ctk.CTk):
             return password_to, enc_password
 
     def copy_to_clipboard(self):
-        pass
+        password = self.password_textbox.get('0.0', 'end')
+        pyperclip.copy(password)
 
     def run_app(self):
         self.mainloop()
