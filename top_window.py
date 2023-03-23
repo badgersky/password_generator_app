@@ -1,7 +1,6 @@
 import customtkinter as ctk
 from utils import decrypt_password
 import csv
-from tkinter import messagebox
 
 
 class TopLevelWindow(ctk.CTkToplevel):
