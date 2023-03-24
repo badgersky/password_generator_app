@@ -99,21 +99,22 @@ class App(ctk.CTk):
 
     def validate_input(self):
         password = self.password_textbox.get('0.0', 'end')
-        enc_password = encrypt_password(password).decode()
-
         password_for = self.to_what_textbox.get('0.0', 'end')[:-1]
+        if password.strip() == '':
+            messagebox.showerror('error', '"Generate password first"')
+            return False
         if password_for.strip() == '':
             messagebox.showerror('error', '"Password for:" cannot be empty')
             return False
-        else:
-            return password_for, enc_password
+        enc_password = encrypt_password(password).decode()
+        return password_for, enc_password
 
     def copy_to_clipboard(self):
         password = self.password_textbox.get('0.0', 'end')
         if password.strip() == '':
             pass
         else:
-            pyperclip.copy(password)
+            pyperclip.copy(password.strip())
 
     def open_toplevel_window(self):
         if self.toplevel_window is None or not self.toplevel_window.winfo_exists():
