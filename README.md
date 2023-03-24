@@ -1,7 +1,7 @@
 # Password generator
 
-### Simple desktop app for generating passwords
+## Simple desktop app for generating passwords
 
-### Application requires xclip utility in order to work
-### make sure to run: $ sudo apt-get install xclip
-
+### On Ubuntu application requires xclip utility. Make sure it`s installed: $ sudo apt-get install xclip
+### On Mac, needed utilities should come with the os.
+### On Windows, no additional utilities are needed.
