@@ -99,7 +99,7 @@ class App(ctk.CTk):
 
     def validate_input(self):
         password = self.password_textbox.get('0.0', 'end')
-        password_for = self.to_what_textbox.get('0.0', 'end')[:-1]
+        password_for = self.to_what_textbox.get('0.0', 'end')[:-1].lower()
         if password.strip() == '':
             messagebox.showerror('error', '"Generate password first"')
             return False

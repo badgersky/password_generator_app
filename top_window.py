@@ -47,17 +47,17 @@ class TopLevelWindow(ctk.CTkToplevel):
         return rows
 
     def validate_password_for_input(self):
-        password_for = self.to_what_textbox.get('0.0', 'end')
+        password_for = self.to_what_textbox.get('0.0', 'end').lower()
         if password_for.strip() == '':
             self.password_textbox.delete('0.0', 'end')
             return False
         else:
-            return True
+            return password_for
 
     def display_password(self):
         if self.validate_password_for_input():
             rows = self.load_from_csv()
-            password_for = self.to_what_textbox.get('0.0', 'end')
+            password_for = self.to_what_textbox.get('0.0', 'end').lower()
             for row in rows:
                 if password_for.strip() == row[0]:
                     password = decrypt_password(row[1])
