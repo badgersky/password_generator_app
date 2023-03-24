@@ -60,16 +60,16 @@ class TopLevelWindow(ctk.CTkToplevel):
             password_for = self.to_what_textbox.get('0.0', 'end')
             for row in rows:
                 if password_for.strip() == row[0]:
-                    enc_password = decrypt_password(row[1])
+                    password = decrypt_password(row[1])
                     self.password_textbox.delete('0.0', 'end')
-                    self.password_textbox.insert('0.0', text=enc_password)
+                    self.password_textbox.insert('0.0', text=password.strip())
 
     def copy_to_clipboard(self):
         password = self.password_textbox.get('0.0', 'end')
         if password.strip() == '':
             pass
         else:
-            pyperclip.copy(password)
+            pyperclip.copy(password.strip())
 
 
 if __name__ == '__main__':
