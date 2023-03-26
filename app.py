@@ -122,10 +122,7 @@ class App(ctk.CTk):
         else:
             self.toplevel_window.focus()
 
-    def run_app(self):
-        self.mainloop()
-
 
 if __name__ == '__main__':
     app = App()
-    app.run_app()
+    app.mainloop()
